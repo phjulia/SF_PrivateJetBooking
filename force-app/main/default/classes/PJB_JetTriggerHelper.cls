@@ -1,9 +1,7 @@
 public with sharing class PJB_JetTriggerHelper {
-    // public SetNextInspDateHelper() {
-
-    // }
+  
     public static void setNextInspectionDate(List<Jet__c> jets){
-        //List<Jet__c> jetsToUpdate = new List<Jet__c>();
+        
         for(Jet__c jet: jets){
             if(jet.Total_Flown_Hours__c>1000 ){
                 Date nextInspection = System.today().AddDays(14);
@@ -14,7 +12,7 @@ public with sharing class PJB_JetTriggerHelper {
                 }else if(dayOfWeek == 'Sun'){
                     nextInspection=nextInspection.AddDays(1);
                 }
-                // system.debug('New inspection date = ' + nextInspection);
+                
                 jet.Next_Inspection__c=nextInspection;
             }else if(jet.Status__c=='On Hold'){
                 Group g = [SELECT Id FROM Group WHERE Name='Jet Operators'];

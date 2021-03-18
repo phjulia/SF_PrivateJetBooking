@@ -24,6 +24,7 @@ public with sharing class PJB_UpdateStatusTriggerHelper {
             if (b.Customer__r.Id != null && b.Jet__r.Id !=null && customersMap.get(b.Customer__r.Id)
             .Total_Flown_Hours__c>=jetsMap.get(b.Jet__r.Id).Min_Amount_of_Hours__c) {
                 b.Status__c= 'Automatically approved';
+                //this doesn't work, related fields Min amount of hours and total_flown_hours are null
             }else{
                 b.Status__c= 'Submitted for approval';
             }
