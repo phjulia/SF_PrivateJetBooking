@@ -1,6 +1,5 @@
 @isTest
 public with sharing class PJB_JetTriggerTest {
-    public static Integer counter=1;
     @isTest static void recoveredDateTestOne(){
         Test.startTest();
         List<Jet__c> jet = PJB_JetTriggerTestData.createTestData(1);
@@ -29,12 +28,14 @@ public with sharing class PJB_JetTriggerTest {
     @isTest static void setOnHoldTest(){
         Test.startTest();
         List<Jet__c> jet = PJB_JetTriggerTestData.sendNotifTestData(1);
+        System.debug(jet.get(0).Id);
         jet.get(0).Status__c='On Hold';
-        update jet.get(0);
+        update jet;
         List<Jet__c> updated =[SELECT Id FROM Jet__c WHERE Id IN :jet];
         Test.stopTest();
-        system.assertEquals(1,updated.size(),'Notification wasnt sent');
+        system.assertEquals(1,updated.size());
     }
+
     @isTest static void setInspDateTestManyJets(){
         
         Test.startTest();

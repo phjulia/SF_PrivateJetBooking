@@ -24,26 +24,17 @@ public with sharing class PJB_JetTriggerTestData {
         return jets;
     }
     public static List<Jet__c> sendNotifTestData(Integer num){
-        Customer__c customer=new Customer__c(Name='Test Customer',Birth_date__c=Date.parse('09/11/1999'),Pilot_License_Num__c='C000',Total_Flown_Hours__c=30);
-        insert customer;
-
+    
         List<Jet__c> jets=new List<Jet__c>();
-        List<Jet_Booking__c> bookings=new List<Jet_Booking__c>();
+    
 
         for(Integer i=0;i<num;i++) {
-        Jet__c jet = new Jet__c(Status__c='On Hold');
+        Jet__c jet = new Jet__c();
+        jet.Status__c='Active';
         jets.add(jet);
         }
         insert jets;
-        
-        for(Jet__c jet:jets){
-        Jet_Booking__c booking= new Jet_Booking__c(Customer__c=customer.Id, Jet__c=jet.Id,
-        DepartureDateTime__c=Datetime.now(),Arrival_Date_Time__c=Datetime.now().addDays(50));
-        bookings.add(booking);
-        }
-        insert bookings;
-        
-        
+    
         return jets;
     }
 }

@@ -29,17 +29,18 @@ for (Jet_Booking__c booking : bookings)
         Approval.ProcessSubmitRequest [] requestList = new Approval.ProcessSubmitRequest []{};
 
     for(Jet_Booking__c booking: bookings){
-        if(booking.Status__c=='Submitted for approval'){
+        if(booking.Status__c.equals('Submitted for approval')){
+     
        Approval.ProcessSubmitRequest req1 = new Approval.ProcessSubmitRequest();
-    
        req1.setComments('Submitting request for approval automatically using Trigger');
-       req1.setProcessDefinitionNameOrId('Approve Booking');
+    req1.setProcessDefinitionNameOrId('Approve Booking');
        req1.setObjectId(booking.id);
           }
+        }
           if(requestList.size()>0){
-    Approval.ProcessResult[] result = Approval.process(requestList);
+             Approval.ProcessResult[] result = Approval.process(requestList);
           }
     }
-}
+
 }
 
